@@ -1,0 +1,30 @@
+README
+Run with:
+    $ sbt
+    > run $url
+- url: starting URI. MUST end with a '/'
+- Depth is limited to 3, change by editing Main.scala
+Make a pretty picture with:
+    dot -Tpdf output.dot > foo.pdf
+
+TODO
+recognise links outside A.HREF (e.g. image maps)
+- very difficult in the general case becuase javascript can load stuff and navigate the browser. Even regexs aren't sufficient here becuase the new URL may never occur in one peice in the document
+properly parse HTML
+Try harder to determine "one domain" is, e.g. currently the host part of the URI is used, so a DNS name, its IP4 and IP6 addresses are considered different.
+- is a subdomain equal to its superdomain (e.g. www.google.com == google.com ?)
+take multiple base URLs on the command line, process all (in parallel) and name each output file after the URL
+
+TRADEOFFS
+In the interests of producion-quality:
+* Scala version pinned to a known quantity
+* Dependences kept to semver minor or patch ranges
+
+Environment
+Runs on Linux - a unikernel cluster might be better suited.
+
+Language
+Scala - modern, cool (easy to hire good people), very hard to work with if you don't know it, possibly a bit niche still. Gives us Akka which is a great computation model for this kind of problem - Erlang/Elixir have all the problems of Scala and more.
+
+Libraries
+async-http-library - canonical, bit java-focussed, pulls in netty
